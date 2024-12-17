@@ -1,7 +1,7 @@
 # asyncapixui
 asyncronios api module for 3x-ui
 
-Creating session\
+Simple usage
 ```python
 import asyncio
 from datetime import datetime, timedelta
