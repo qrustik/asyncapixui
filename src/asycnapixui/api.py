@@ -3,8 +3,8 @@ import json
 from typing import Any
 from aiohttp import ClientSession
 
-from asycnapixui.log import logger, info
-from asycnapixui.models import Inbound, ClientTraffic, Client
+from src.asycnapixui.log import logger, info
+from src.asycnapixui.models import Inbound, ClientTraffic, Client
 
 
 class Api:

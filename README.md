@@ -1,15 +1,16 @@
 # asyncapixui
-asyncronios api module for 3x-ui
+Asynchronous api module for 3x-ui
 
 Simple usage
+
 ```python
 import asyncio
 from datetime import datetime, timedelta
 from logging import DEBUG, getLogger, basicConfig
 from uuid import uuid4
 
-from asycnapixui import Api
-from asycnapixui import Client, ExpiryTime
+from src.asycnapixui import Api
+from src.asycnapixui import Client, ExpiryTime
 
 
 async def main():
@@ -50,7 +51,6 @@ logs with information about responses
 logger = getLogger()
 FORMAT = '%(asctime)s : %(levelname)s:%(name)s : %(funcName)s:%(message)s'
 basicConfig(level=DEBUG, format=FORMAT)
-
 
 if __name__ == "__main__":
     asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
