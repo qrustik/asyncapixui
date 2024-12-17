@@ -9,8 +9,9 @@ from datetime import datetime, timedelta
 from logging import DEBUG, getLogger, basicConfig
 from uuid import uuid4
 
-from src.asycnapixui import Api
-from src.asycnapixui import Client, ExpiryTime
+from asycnapixui.api import Api
+from asycnapixui.models import Client
+from asycnapixui.utils import ExpiryTime
 
 
 async def main():
