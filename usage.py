@@ -1,37 +1,45 @@
 import asyncio
-import random
-import string
 from datetime import datetime, timedelta
 from logging import DEBUG, getLogger, basicConfig
 from uuid import uuid4
 
-from asycnapixui import Client, ExpiryTime
 from asycnapixui import Api
-
-
-def ran_gen(size, chars=string.ascii_uppercase + string.digits):
-    return ''.join(random.choice(chars) for _ in range(size))
+from asycnapixui import Client, ExpiryTime
 
 
 async def main():
     async with Api(url="https://example.com:port/path/", login="admin", password="admin", token="") as api:
-        await api.post_login()
-        inbounds = await api.get_inbounds()
+        """
+        create api session
+        """
+
         clients = []
-        inbound_id = inbounds[1].id
-        print(await api.get_inbound(inbound_id))
-        for i in range(1):
+        emails = ['Petya', 'Vasya', 'Egor']
+
+        """get inbound by id"""
+        inbound = await api.get_inbound(1)
+
+        """create clients list"""
+        for email in emails:
             key = str(uuid4())
-            clients.append(Client(id=key, email=ran_gen(5), subId=key))
-        await api.post_add_client_inbound(clients, inbound_id)
+            clients.append(Client(id=key, email=email, subId=key))
+
+        """add clients to inbound """
+        await api.post_add_client_inbound(clients, inbound.id)
+
+        """
+        enable clients in inbound 
+        and add date to end = now + 10 days
+        """
         for client in clients:
-            client_traffic = await api.get_client_traffics(email=client.email)
-            print(client_traffic)
             client.enable = True
             client.expiryTime = ExpiryTime(date=datetime.now() + timedelta(days=10)).expiryTime
-            res = await api.post_update_client(client, inbound_id, client.id)
-            print(res)
+            await api.post_update_client(client, inbound.id, client.id)
 
+
+"""
+logs with information about responses
+"""
 
 logger = getLogger()
 basicConfig(level=DEBUG, format='%(asctime)s : %(levelname)s:%(name)s : %(funcName)s:%(message)s')
