@@ -9,5 +9,6 @@ def info(func):
             logger.info('Success')
         else:
             logger.info(res['msg'])
+        return res
 
     return wrapper
