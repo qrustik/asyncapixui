@@ -13,7 +13,8 @@ from asycnapixui import Client, ExpiryTime
 
 
 async def main():
-    async with Api(url="https://example.com:port/path/", login="admin", password="admin", token="") as api:
+    async with Api(url="https://example.com:port/path/",
+                   login="admin", password="admin", token="") as api:
         """
         create api session
         """
@@ -47,7 +48,8 @@ logs with information about responses
 """
 
 logger = getLogger()
-basicConfig(level=DEBUG, format='%(asctime)s : %(levelname)s:%(name)s : %(funcName)s:%(message)s')
+FORMAT = '%(asctime)s : %(levelname)s:%(name)s : %(funcName)s:%(message)s'
+basicConfig(level=DEBUG, format=FORMAT)
 
 
 if __name__ == "__main__":
